@@ -40,6 +40,7 @@ public interface PostMapper {
         return PostSummaryOutput
                 .builder()
                 .id(post.getId().getValue())
+                .title(post.getTitle())
                 .author(post.getAuthor())
                 .summary(GenerateSummary.generateSummary(post.getBody()))
                 .build();

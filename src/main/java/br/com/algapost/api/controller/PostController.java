@@ -28,10 +28,10 @@ public class PostController {
     private final PostService postService;
 
     @PostMapping
-    public ResponseEntity<Void> created(@RequestBody @Valid PostInput input) {
+    public ResponseEntity<PostOutput> created(@RequestBody @Valid PostInput input) {
         var postOutput = postService.created(postMapper.toEntity(input));
         var location = URI.create("api/posts/" + postOutput.getId());
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.created(location).body(postOutput);
     }
 
     @GetMapping("/{postId}")

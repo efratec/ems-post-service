@@ -2,7 +2,6 @@ package br.com.algapost.api.common;
 
 import lombok.experimental.UtilityClass;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
 @UtilityClass
@@ -13,15 +12,12 @@ public class GenerateSummary {
             return "";
         }
 
-        var sentences = body
-                .replaceAll("\\s+", " ")
-                .trim()
-                .split("(?<=[.!?])\\s+");
-
-        return Arrays.stream(sentences)
-                .limit(3)
+        return body
+                .lines()
                 .map(String::trim)
-                .collect(Collectors.joining(" "));
+                .filter(line -> !line.isEmpty())
+                .limit(3)
+                .collect(Collectors.joining("\n"));
     }
 
 }
